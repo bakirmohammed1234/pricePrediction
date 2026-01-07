@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>House Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+        }
+        .container {
+            width: 400px;
+            margin: 60px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input, button {
+            width: 100%;
+            padding: 8px;
+            margin: 6px 0;
+        }
+        button {
+            background: #2c7be5;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        h2 {
+            text-align: center;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 10px;
+            background: #e9f5ff;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Prédiction du prix de maison</h2>
+
+    <form method="POST">
+        <input type="number" name="area" placeholder="Surface (m²)" required>
+        <input type="number" name="bedrooms" placeholder="Chambres" required>
+        <input type="number" name="bathrooms" placeholder="Salles de bain" required>
+        <input type="number" name="stories" placeholder="Étages" required>
+        <input type="number" name="parking" placeholder="Parking" required>
+        <input type="number" name="mainroad" placeholder="Main road (1 = oui, 0 = non)" required>
+
+        <button type="submit">Prédire le prix</button>
+    </form>
+
+    {% if prediction %}
+        <div class="result">
+            Prix estimé : {{ prediction }}
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
