@@ -3,7 +3,7 @@ venv/
 __pycache__/
 model.pkl
 mlflow.db
-best_model.pkl
+
 tracking/
 model.ipynb
 mlruns/
