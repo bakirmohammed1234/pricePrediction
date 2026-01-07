@@ -1,3 +1,4 @@
-data/
 venv/
+mlruns/
 __pycache__/
+*.pyc
