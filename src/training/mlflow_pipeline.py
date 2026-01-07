@@ -1,4 +1,3 @@
-# src/training/mlflow_pipeline.py
 import mlflow
 import mlflow.sklearn
 from utils import load_data
@@ -12,40 +11,32 @@ def run_pipeline():
 
     with mlflow.start_run(run_name="LinearRegression"):
 
-        # Tags (innovation 💡)
         mlflow.set_tags({
-            "project": "housing-system",
-            "model": "LinearRegression",
-            "author": "Abdelaziz",
-            "stage": "training"
+            "project": "price-prediction",
+            "owner": "Abdelaziz",
+            "framework": "scikit-learn",
+            "type": "regression"
         })
 
-        # Load data
-        X_train, X_test, y_train, y_test = load_data("Housing.csv")
+        X_train, X_test, y_train, y_test = load_data()
 
-        # Params
+        mlflow.log_param("model_type", "LinearRegression")
         mlflow.log_param("test_size", 0.2)
-        mlflow.log_param("random_state", 42)
 
-        # Train
         model, mse, r2 = train_model(
             X_train, y_train, X_test, y_test
         )
 
-        # Metrics
         mlflow.log_metric("mse", mse)
         mlflow.log_metric("r2", r2)
 
-        # Model registry (🔥 très important)
         mlflow.sklearn.log_model(
             model,
             artifact_path="model",
-            registered_model_name="HousingLinearModel"
+            registered_model_name="HousingModel"
         )
 
-        print("✅ Training completed")
-        print(f"MSE: {mse}")
-        print(f"R2 : {r2}")
+        print("✅ MLflow pipeline finished successfully")
 
 
 if __name__ == "__main__":
